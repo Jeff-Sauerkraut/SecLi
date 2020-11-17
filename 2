@@ -1,0 +1,39 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.action_chains  import ActionChains
+
+
+import time
+driver = webdriver.Chrome()
+
+driver.get("#######################")
+time.sleep(6)
+driver.find_element_by_xpath('//*[@id="layui-layer1"]/div[3]/a').click()
+time.sleep(2)
+window_before = driver.window_handles[0]
+for x in range(1,11):   
+    
+    dsa = "//*[@id='managerList']/tbody/tr["+str(x)+"]/td[2]/a"
+    driver.find_element_by_xpath(dsa).click()
+    window_after = driver.window_handles[1]
+    time.sleep(8)
+    driver.switch_to.window(window_after)
+    b=driver.find_element_by_xpath('/html/body/div[3]/div/div[4]/div[1]/div[2]/table/tbody/tr[4]/td[2]')
+
+    c=(b.text)
+    d=int(c[0:4])
+
+    if d>=2004:
+        ele = driver.find_element_by_xpath('//*[@id="complaint2"]')
+        nameList.append(ele.text)
+    ##else:
+     
+              
+
+    driver.close()
+    driver.switch_to.window(window_before)   
+##
+print(nameList)
+
+##//*[@id="managerList_paginate"]/a[3]
